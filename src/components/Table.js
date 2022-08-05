@@ -13,7 +13,6 @@ const Table = () => {
   const [pageCount, setPageCount] = useState(0); //تعدادکل صفحات
   const [actionValue, setActionValue] = useState("");
   const [searchItem, setSearchItem] = useState("");
-  // const [allUserData, setAllUserData] = useState([]);
 
   const changePerPageHandler = (e) => {
     setPerPage(+e.target.value);
@@ -23,7 +22,7 @@ const Table = () => {
     const selectedPage = e.selected;
     console.log(selectedPage);
     if (perPage === 10) setOffset(selectedPage * 10);
-    if (perPage === 5) setOffset(selectedPage * 5);
+    if (perPage === 6) setOffset(selectedPage * 6);
   };
 
   const changeActionHandler = (e, id) => {
@@ -47,14 +46,6 @@ const Table = () => {
 
   const searchHandler = (e) => {
     setSearchItem(e.target.value);
-    // if (e.target.value !== "") {
-    //   const filteredBySearch = todos.filter((todo) => {
-    //     return Object.values(todo).join(" ").toLowerCase().includes(e.target.value.toLowerCase());
-    //   });
-    //   setTodosSliced(filteredBySearch);
-    // } else {
-    //   setTodosSliced(todos);
-    // }
   };
 
   useEffect(() => {
@@ -75,14 +66,30 @@ const Table = () => {
     fetchUsers();
   }, [offset, perPage]);
 
-  // useEffect(() => {
-  //   // let searchResult = todos;
-  //   // searchResult = searchResult.filter((todo) => {
-  //   //   // console.log(todo.id.toString().includes());
-  //   //   return todo.id.toString().includes(searchItem);
-  //   // });
-  //   // setTodosSliced(searchResult);
-  // }, [todos]);
+  const jadid = todosSliced.map((todo) => {
+    const pinnedUser = userData.find((user) => user.id === todo.userId);
+
+    return { ...todo, pinnedUser };
+  });
+
+  const filterByUserSelected = !searchItem
+    ? todosSliced
+    : jadid.filter((todo) => {
+        const {
+          title,
+          pinnedUser: { name, email },
+        } = todo;
+        const allDataForSearch = {
+          name,
+          email,
+          title,
+        };
+
+        return Object.values(allDataForSearch)
+          .join(" ")
+          .toLowerCase()
+          .includes(searchItem.toLowerCase());
+      });
 
   return (
     <>
@@ -97,8 +104,8 @@ const Table = () => {
             <option value={10} name="10">
               10
             </option>
-            <option value={5} name="5">
-              5
+            <option value={6} name="6">
+              6
             </option>
           </select>
           entries
@@ -109,8 +116,8 @@ const Table = () => {
             value={searchItem}
             onChange={searchHandler}
             type="text"
-            placeholder=" search name , etc"
-            className="border-2 border-gray-300 rounded-md py-1 px-2 placeholder:italic placeholder:text-gray-500 placeholder:text-base placeholder:font-semibold"
+            placeholder=" search By name,email ,todo "
+            className=" border-2 border-gray-300 rounded-md py-1 px-2 placeholder:italic placeholder:text-gray-500 placeholder:text-sm placeholder:font-semibold"
           />
         </div>
       </div>
@@ -119,7 +126,7 @@ const Table = () => {
           <table className="  w-full  border-spacing-4 border-separate  ">
             <thead className=" ">
               <tr className=" ">
-                <th>
+                <th className="hidden md:table-cell">
                   <input type="checkbox" />
                 </th>
                 <th>Users</th>
@@ -130,12 +137,12 @@ const Table = () => {
               </tr>
             </thead>
             <tbody>
-              {todosSliced.map((todo) => {
+              {filterByUserSelected.map((todo) => {
                 const linkedUser = userData.find((user) => user.id === todo.userId);
 
                 return (
                   <tr key={todo.id} className="border-b ">
-                    <td className="text-center">
+                    <td className=" hidden md:table-cell text-center">
                       <input type="checkbox" />
                     </td>
                     <td className="text-center  ">
