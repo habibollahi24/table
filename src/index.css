@@ -4,12 +4,12 @@
 
 @layer base {
   .Completed {
-    @apply text-green-500 bg-green-50 py-2 rounded-md;
+    @apply text-green-500 bg-green-50 w-10 md:w-auto py-2 rounded-md;
   }
   .InCompleted {
-    @apply text-red-400 bg-red-50 py-2 rounded-md;
+    @apply text-red-400 bg-red-50 w-10 md:w-auto py-2 rounded-md;
   }
   .unActive {
-    @apply text-yellow-500 bg-orange-50 py-2 rounded-md;
+    @apply text-yellow-500 bg-orange-50 w-10 md:w-auto py-2 rounded-md;
   }
 }

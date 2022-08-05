@@ -1,9 +1,9 @@
-import Table from "./components/Table";
+import TodoTable from "./components/TodoTable";
 
 function App() {
   return (
     <div className="container mx-auto p-1 max-w-screen-lg">
-      <Table />
+      <TodoTable />
     </div>
   );
 }
