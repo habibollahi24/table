@@ -12,7 +12,7 @@ const TodoTable = () => {
   const [offset, setOffset] = useState(0);
   const [perPage, setPerPage] = useState(10); //هرصفحه10تا
   const [pageCount, setPageCount] = useState(0); //تعدادکل صفحات
-  const [setActionValue] = useState("");
+  const [actionValue, setActionValue] = useState("");
   const [searchItem, setSearchItem] = useState("");
 
   const changePerPageHandler = (e) => {
@@ -38,7 +38,6 @@ const TodoTable = () => {
             : "unActive";
         return { ...todo, completed: result };
       } else {
-        console.log("bye");
         return todo;
       }
     });
@@ -92,7 +91,7 @@ const TodoTable = () => {
 
   return (
     <>
-      <div className="flex flex-col md:flex-row space-y-5 justify-between items-center my-8">
+      <div className="flex flex-col md:flex-row space-y-5 md:space-y-0 justify-between items-center my-8">
         <div className="flex  items-center text-gray-700 font-semibold">
           <label>Show</label>
           <select
