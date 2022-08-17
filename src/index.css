@@ -4,12 +4,27 @@
 
 @layer base {
   .Completed {
-    @apply text-green-500 bg-green-50 w-10 md:w-auto py-2 rounded-md;
+    @apply text-green-500 bg-green-50  md:w-auto py-2 rounded-md;
   }
   .InCompleted {
-    @apply text-red-400 bg-red-50 w-10 md:w-auto py-2 rounded-md;
+    @apply text-red-400 bg-red-50  md:w-auto py-2 rounded-md;
   }
   .unActive {
-    @apply text-yellow-500 bg-orange-50 w-10 md:w-auto py-2 rounded-md;
+    @apply text-yellow-500 bg-orange-50  md:w-auto py-2 rounded-md;
   }
+}
+
+table th {
+  padding: 30px 20px;
+}
+
+table td {
+  padding: 20px 5px;
+}
+tr:nth-child(even) {
+  background-color: #eff6ff91;
+}
+
+tr:hover {
+  background-color: #eee;
 }

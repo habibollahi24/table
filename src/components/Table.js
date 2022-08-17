@@ -2,19 +2,20 @@ import React from "react";
 import { HiDotsVertical } from "react-icons/hi";
 
 const Table = ({ userData, filterByUserSelected, onAction }) => {
+  // md:border-spacing-4 border-separate
   return (
     <>
-      <div className=" rounded-2xl  overflow-auto md:overflow-hidden border-2 md:px-4 ">
-        <table className="  w-full   md:border-spacing-4 border-separate  ">
-          <thead className=" ">
-            <tr className="text-sm ">
-              <th className="hidden md:table-cell">
+      <div className=" rounded-2xl overflow-auto md:overflow-hidden border border-blue-200 ">
+        <table className="w-full md:table-fixed">
+          <thead className="bg-blue-300">
+            <tr className="text-sm md:text-lg text-gray-600  ">
+              <th className="hidden md:table-cell w-[10%]">
                 <input type="checkbox" />
               </th>
               <th>Users</th>
               <th>Contact</th>
               <th>Todo</th>
-              <th className="hidden md:block">Completed</th>
+              <th className="hidden md:block ">Completed</th>
               <th className="md:hidden">Comp</th>
               <th>Actions</th>
             </tr>
@@ -45,11 +46,12 @@ const Table = ({ userData, filterByUserSelected, onAction }) => {
                     <div className="text-xs  text-gray-500 ">{linkedUser && linkedUser.phone}</div>
                   </td>
                   <td className="text-center  text-xs md:text-sm font-semibold text-gray-500 ">
-                    {todo.title.slice(0, 15)}
+                    {todo.title}
+                    {/* .slice(0, 15) */}
                   </td>
-                  <td>
+                  <td className="">
                     <div
-                      className={`text-center text-xs font-semibold hidden md:block ${
+                      className={`text-center text-xs  font-semibold hidden md:block ${
                         todo.completed === true
                           ? "Completed"
                           : todo.completed === false
@@ -75,8 +77,8 @@ const Table = ({ userData, filterByUserSelected, onAction }) => {
                       {todo.completed === true ? "Comp" : todo.completed === false ? "InCo" : "unA"}
                     </div>
                   </td>
-                  <td className="text-center ">
-                    <div className="flex items-center text-center justify-center space-x-5 ">
+                  <td className=" text-center ">
+                    <div className="flex items-center text-center justify-center md:space-x-5 ">
                       <HiDotsVertical className="hidden md:block" />
 
                       <select
